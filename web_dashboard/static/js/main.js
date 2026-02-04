@@ -1,38 +1,7 @@
-// Main application file - imports và logic chính
-// Import các module khác (config, state, utils, ui) được load qua HTML
-
-
-
-
-// Fetch data from server
-async function fetchData() {
-    try {
-        const dataResponse = await fetch(API_URL);
-        if (!dataResponse.ok) throw new Error('Failed to fetch data');
-        const data = await dataResponse.json();
-        
-        updateConnectionStatus(true);
-        updateStats(data);
-        updateActiveVehicles(data.activeVehicles || []);
-        updateParkingGrid(data.totalSlots, data.occupiedSlots);
-        
-        const historyResponse = await fetch(HISTORY_URL);
-        if (historyResponse.ok) {
-            const history = await historyResponse.json();
-            updateHistory(history);
-            totalRevenue = history.reduce((sum, event) => sum + (event.fee || 0), 0);
-        }
-        
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        updateConnectionStatus(false);
-    }
-}
-
-// Initialize
 function init() {
     console.log('Arduino Parking Dashboard Initialized');
     
+    // Setup tabs first
     setTimeout(() => {
         console.log('Calling setupTabs...');
         setupTabs();
@@ -56,16 +25,14 @@ function init() {
     }, 1000);
 }
 
-// Start when page loads
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
 } else {
     init();
 }
 
-// Handle visibility change (pause when tab is hidden)
 document.addEventListener('visibilitychange', () => {
     if (!document.hidden) {
-        fetchData(); // Refresh immediately when tab becomes visible
+        fetchData();
     }
 });

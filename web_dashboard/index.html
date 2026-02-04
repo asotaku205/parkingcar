@@ -3,111 +3,344 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚗 Hệ Thống Quản Lý Bãi Đỗ Xe</title>
-    <link rel="stylesheet" href="static/css/style.css">
+    <title>Hệ Thống Quản Lý Bãi Đỗ Xe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="static/css/base.css">
+    <link rel="stylesheet" href="static/css/sidebar.css">
+    <link rel="stylesheet" href="static/css/header.css">
+    <link rel="stylesheet" href="static/css/stats.css">
+    <link rel="stylesheet" href="static/css/tabs.css">
+    <link rel="stylesheet" href="static/css/cards.css">
+    <link rel="stylesheet" href="static/css/vehicles.css">
+    <link rel="stylesheet" href="static/css/revenue.css">
+    <link rel="stylesheet" href="static/css/tables.css">
+    <link rel="stylesheet" href="static/css/footer.css">
+    <link rel="stylesheet" href="static/css/responsive.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-content">
-                <h1>🚗 Hệ Thống Quản Lý Bãi Đỗ Xe</h1>
-                <div class="datetime">
-                    <div class="time" id="currentTime">--:--:--</div>
-                    <div class="date" id="currentDate">--/--/----</div>
-                </div>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <span>Hệ Thống Bãi Đỗ Xe</span>
             </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="javascript:void(0)" class="nav-item active" data-tab="overview">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Tổng Quan</span>
+            </a>
+            <a href="javascript:void(0)" class="nav-item" data-tab="vehicles">
+                <i class="fas fa-car-side"></i>
+                <span>Xe Đang Đỗ</span>
+            </a>
+            <a href="javascript:void(0)" class="nav-item" data-tab="revenue">
+                <i class="fas fa-chart-bar"></i>
+                <span>Doanh Thu</span>
+            </a>
+            <a href="javascript:void(0)" class="nav-item" data-tab="history">
+                <i class="fas fa-history"></i>
+                <span>Lịch Sử</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
             <div class="connection-status" id="connectionStatus">
                 <span class="status-dot"></span>
                 <span class="status-text">Đang kết nối...</span>
             </div>
-        </header>
+        </div>
+    </aside>
 
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1 class="page-title">Bảng Điều Khiển Bãi Đỗ Xe</h1>
+        </div>
+        <div class="header-right">
+            <div class="datetime">
+                <div class="time"><span id="currentTime">--:--:--</span></div>
+                <div class="date"><span id="currentDate">--/--/----</span></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
         <!-- Stats Cards -->
         <section class="stats-grid">
             <div class="stat-card total">
-                <div class="stat-icon">🅿️</div>
+                <div class="stat-icon"><i class="fas fa-parking"></i></div>
                 <div class="stat-info">
+                    <div class="stat-label">TỔNG CHỖ ĐỖ</div>
                     <div class="stat-value" id="totalSlots">4</div>
-                    <div class="stat-label">Tổng Chỗ</div>
                 </div>
             </div>
 
             <div class="stat-card available">
-                <div class="stat-icon">✅</div>
+                <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
                 <div class="stat-info">
+                    <div class="stat-label">CHỖ TRỐNG</div>
                     <div class="stat-value" id="availableSlots">4</div>
-                    <div class="stat-label">Chỗ Trống</div>
                 </div>
             </div>
 
             <div class="stat-card occupied">
-                <div class="stat-icon">🚙</div>
+                <div class="stat-icon"><i class="fas fa-car-side"></i></div>
                 <div class="stat-info">
+                    <div class="stat-label">ĐANG ĐỖ</div>
                     <div class="stat-value" id="occupiedSlots">0</div>
-                    <div class="stat-label">Đang Đỗ</div>
                 </div>
             </div>
 
             <div class="stat-card revenue">
-                <div class="stat-icon">💰</div>
+                <div class="stat-icon"><i class="fas fa-coins"></i></div>
                 <div class="stat-info">
+                    <div class="stat-label">DOANH THU HÔM NAY</div>
                     <div class="stat-value" id="totalRevenue">0</div>
-                    <div class="stat-label">Doanh Thu (VNĐ)</div>
+                    <div class="stat-sublabel">VNĐ</div>
                 </div>
             </div>
         </section>
 
         <!-- Main Content -->
-        <div class="content-grid">
-            <!-- Active Vehicles -->
-            <section class="card">
-                <h2 class="card-title">🚙 Xe Đang Đỗ (<span id="activeCount">0</span>)</h2>
-                <div class="active-vehicles" id="activeVehicles">
-                    <div class="empty-state">
-                        <div class="empty-icon">🅿️</div>
-                        <p>Chưa có xe đang đỗ</p>
+        <div class="content-wrapper">
+            <!-- Tab Content -->
+            <div class="tab-content active" id="overview-tab">
+                <div class="content-grid">
+                    <!-- Parking Slots Visual -->
+                    <section class="card">
+                        <h2 class="card-title"><i class="fas fa-th-large"></i> SƠ ĐỒ BÃI ĐỖ</h2>
+                        <div class="parking-grid" id="parkingGrid">
+                            <!-- Will be filled by JS -->
+                        </div>
+                    </section>
+
+                    <!-- Quick Stats -->
+                    <section class="card">
+                        <h2 class="card-title"><i class="fas fa-chart-line"></i> THỐNG KÊ NHANH</h2>
+                        <div class="quick-stats">
+                            <div class="quick-stat-item">
+                                <i class="fas fa-car-side"></i>
+                                <div>
+                                    <div class="quick-stat-value" id="quickOccupied">0</div>
+                                    <div class="quick-stat-label">Xe đang đỗ</div>
+                                </div>
+                            </div>
+                            <div class="quick-stat-item">
+                                <i class="fas fa-coins"></i>
+                                <div>
+                                    <div class="quick-stat-value" id="quickRevenue">0</div>
+                                    <div class="quick-stat-label">Doanh thu hôm nay</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <div class="tab-content" id="vehicles-tab">
+                <section class="card full-width">
+                    <h2 class="card-title"><i class="fas fa-list"></i> DANH SÁCH XE ĐANG ĐỖ (<span id="activeCount">0</span>)</h2>
+                    <div class="active-vehicles" id="activeVehicles">
+                        <div class="empty-state">
+                            <p><i class="fas fa-inbox"></i> Chưa có xe đang đỗ</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="tab-content" id="revenue-tab">
+                <div class="tab-header">
+                    <h2 class="tab-main-title"><i class="fas fa-chart-bar"></i> BÁO CÁO DOANH THU</h2>
+                    <button class="export-btn" onclick="exportRevenueToExcel()">
+                        <i class="fas fa-file-excel"></i> Xuất Báo Cáo Excel
+                    </button>
+                </div>
+                <div class="revenue-layout">
+                    <!-- Left Column -->
+                    <div class="revenue-left">
+                    <!-- Revenue Summary -->
+                    <section class="card">
+                        <h2 class="card-title"><i class="fas fa-coins"></i> TỔNG QUAN DOANH THU</h2>
+                        <div class="revenue-summary">
+                            <div class="revenue-item">
+                                <div class="revenue-label">Doanh thu hôm nay</div>
+                                <div class="revenue-value" id="revToday">0 đ</div>
+                            </div>
+                            <div class="revenue-item">
+                                <div class="revenue-label">Tổng lượt vào hôm nay</div>
+                                <div class="revenue-value" id="totalEntryToday">0</div>
+                            </div>
+                            <div class="revenue-item">
+                                <div class="revenue-label">Tổng lượt ra hôm nay</div>
+                                <div class="revenue-value" id="totalExitToday">0</div>
+                            </div>
+                            <div class="revenue-item">
+                                <div class="revenue-label">Trung bình thời gian gửi</div>
+                                <div class="revenue-value" id="avgDuration">0 phút</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Fee Breakdown -->
+                    <section class="card">
+                        <h2 class="card-title"><i class="fas fa-receipt"></i> PHÂN TÍCH PHÍ GỬI XE</h2>
+                        <div class="fee-breakdown">
+                            <table class="fee-table">
+                                <thead>
+                                    <tr>
+                                        <th>Loại phí</th>
+                                        <th>Số lượt</th>
+                                        <th>Tổng thu</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><i class="fas fa-gift"></i> Miễn phí (≤ 1 phút)</td>
+                                        <td id="freeParkingCount">0</td>
+                                        <td>0 đ</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-ticket"></i> Vé lượt (> 1 phút)</td>
+                                        <td id="firstHourCount">0</td>
+                                        <td id="firstHourRevenue">0 đ</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-moon"></i> Qua đêm/Nhiều ngày</td>
+                                        <td id="additionalHourCount">0</td>
+                                        <td id="additionalHourRevenue">0 đ</td>
+                                    </tr>
+                                    <tr class="total-row">
+                                        <td><strong>Tổng cộng</strong></td>
+                                        <td id="totalTransactions">0</td>
+                                        <td><strong id="totalRevenueBreakdown">0 đ</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="fee-note">
+                                <p><strong>Bảng giá:</strong></p>
+                                <ul>
+                                    <li><strong>Thành viên:</strong></li>
+                                    <li>&nbsp;&nbsp;≤ 1 phút: Miễn phí</li>
+                                    <li>&nbsp;&nbsp;Vé lượt (> 1 phút, ≤ 1 ngày): 3,000 VNĐ</li>
+                                    <li>&nbsp;&nbsp;Qua đêm (> 1 ngày): 7,000 VNĐ</li>
+                                    <li>&nbsp;&nbsp;Nhiều ngày: 7,000 + 7,000/ngày</li>
+                                    <li><strong>Khách:</strong></li>
+                                    <li>&nbsp;&nbsp;≤ 1 phút: Miễn phí</li>
+                                    <li>&nbsp;&nbsp;Vé lượt (> 1 phút, ≤ 1 ngày): 5,000 VNĐ</li>
+                                    <li>&nbsp;&nbsp;Qua đêm (> 1 ngày): 10,000 VNĐ</li>
+                                    <li>&nbsp;&nbsp;Nhiều ngày: 10,000 + 10,000/ngày</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="margin-top: 20px; padding: 15px; background: #000; border-radius: 8px; border: 1px solid #333;">
+                                <h3 style="margin-top: 0; margin-bottom: 15px; color: #fff;"><i class="fas fa-users"></i> Thống kê theo loại thẻ</h3>
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                                    <div style="text-align: center; padding: 15px; background: #1a1a1a; border-radius: 5px; border: 1px solid #333;">
+                                        <i class="fas fa-id-card" style="font-size: 32px; color: #fff; margin-bottom: 8px;"></i>
+                                        <div style="font-size: 14px; color: #999; margin-bottom: 5px;">Thành viên</div>
+                                        <div style="font-size: 28px; font-weight: bold; color: #fff;"><span id="memberCount">0</span> lượt</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 15px; background: #1a1a1a; border-radius: 5px; border: 1px solid #333;">
+                                        <i class="fas fa-user" style="font-size: 32px; color: #ccc; margin-bottom: 8px;"></i>
+                                        <div style="font-size: 14px; color: #999; margin-bottom: 5px;">Thẻ khách</div>
+                                        <div style="font-size: 28px; font-weight: bold; color: #fff;"><span id="nonMemberCount">0</span> lượt</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="revenue-right">
+                    <!-- Revenue Chart -->
+                    <section class="card full-width">
+                        <h2 class="card-title"><i class="fas fa-chart-line"></i> THỐNG KÊ THEO LOẠI PHÍ</h2>
+                        <div class="revenue-stats-visual">
+                            <div class="stat-bar">
+                                <div class="stat-bar-label">
+                                    <span>Miễn phí (≤ 1 phút)</span>
+                                    <span id="freePercentage">0%</span>
+                                </div>
+                                <div class="stat-bar-bg">
+                                    <div class="stat-bar-fill free" id="freeBar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="stat-bar">
+                                <div class="stat-bar-label">
+                                    <span>Vé lượt (> 1 phút)</span>
+                                    <span id="firstHourPercentage">0%</span>
+                                </div>
+                                <div class="stat-bar-bg">
+                                    <div class="stat-bar-fill first-hour" id="firstHourBar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="stat-bar">
+                                <div class="stat-bar-label">
+                                    <span>Qua đêm/Nhiều ngày</span>
+                                    <span id="additionalPercentage">0%</span>
+                                </div>
+                                <div class="stat-bar-bg">
+                                    <div class="stat-bar-fill additional" id="additionalBar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <!-- Parking Slots Visual -->
-            <section class="card">
-                <h2 class="card-title">📊 Sơ Đồ Bãi Đỗ</h2>
-                <div class="parking-grid" id="parkingGrid">
-                    <!-- Will be filled by JS -->
+            <div class="tab-content" id="history-tab">
+                <div class="tab-header">
+                    <h2 class="tab-main-title"><i class="fas fa-history"></i> LỊCH Sử HOẠT ĐỘNG</h2>
+                    <button class="export-btn" onclick="exportHistoryToExcel()">
+                        <i class="fas fa-file-excel"></i> Xuất Lịch Sử Excel
+                    </button>
                 </div>
-            </section>
-
-            <!-- Event History -->
-            <section class="card full-width">
-                <h2 class="card-title">📝 Lịch Sử Hoạt Động</h2>
-                <div class="history-table-wrapper">
-                    <table class="history-table">
-                        <thead>
-                            <tr>
-                                <th>Thời Gian</th>
-                                <th>Loại</th>
-                                <th>Thẻ RFID</th>
-                                <th>Phí</th>
-                            </tr>
-                        </thead>
-                        <tbody id="historyTableBody">
-                            <tr>
-                                <td colspan="4" class="empty-history">Chưa có hoạt động nào</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
+                <section class="card full-width">
+                    <div class="history-table-wrapper">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th><i class="far fa-clock"></i> Thời Gian</th>
+                                    <th><i class="fas fa-exchange-alt"></i> Loại</th>
+                                    <th><i class="fas fa-id-card"></i> Thẻ RFID</th>
+                                    <th><i class="fas fa-hourglass-half"></i> Thời Gian Gửi</th>
+                                    <th><i class="fas fa-money-bill-wave"></i> Phí</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyTableBody">
+                                <tr>
+                                    <td colspan="5" class="empty-history">Chưa có hoạt động nào</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
         </div>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <p>Arduino Parking System - Nhóm 1 | Cập nhật: <span id="lastUpdate">--</span></p>
-        </footer>
     </div>
 
-    <script src="static/js/app.js"></script>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Arduino Parking System - Nhóm 1 | Cập nhật: <span id="lastUpdate">--</span></p>
+    </footer>
+    </div>
+
+    <!-- SheetJS library for Excel export -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+    
+    <script src="static/js/config.js"></script>
+    <script src="static/js/state.js"></script>
+    <script src="static/js/utils.js"></script>
+    <script src="static/js/api.js"></script>
+    <script src="static/js/ui.js"></script>
+    <script src="static/js/main.js"></script>
+    <script src="static/js/export.js"></script>
 </body>
 </html>

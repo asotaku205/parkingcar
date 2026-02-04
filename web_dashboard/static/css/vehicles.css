@@ -1,0 +1,102 @@
+.active-vehicles {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.vehicle-item {
+    background: #3d3d3d;
+    border-left: 4px solid #00bcd4;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.vehicle-item:hover {
+    transform: translateX(5px);
+    background: #454545;
+}
+
+.vehicle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    gap: 15px;
+}
+
+.vehicle-uid {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    color: #00bcd4;
+    font-size: 1.1rem;
+}
+
+.vehicle-uid i {
+    margin-right: 8px;
+}
+
+.vehicle-badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+}
+
+.badge i {
+    font-size: 0.7rem;
+}
+
+.badge-member {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #000;
+}
+
+.badge-guest {
+    background: #666;
+    color: #fff;
+}
+
+.vehicle-time-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.vehicle-time-in,
+.vehicle-duration {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.vehicle-time-in {
+    color: #bbb;
+}
+
+.vehicle-duration {
+    color: #ff9800;
+    font-weight: bold;
+}
+
+.vehicle-fee {
+    color: #4caf50;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

@@ -1,0 +1,185 @@
+.revenue-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.revenue-left,
+.revenue-right {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.revenue-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 25px;
+}
+
+.revenue-summary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.revenue-item {
+    background: #2d2d2d;
+    padding: 18px;
+    border-radius: 8px;
+    border: 1px solid #404040;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.revenue-item:hover {
+    background: #3d3d3d;
+    border-color: #505050;
+}
+
+.revenue-label {
+    font-size: 0.85rem;
+    color: #999;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+.revenue-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.fee-breakdown {
+    overflow-x: auto;
+}
+
+.fee-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.fee-table thead {
+    background: #404040;
+    color: white;
+}
+
+.fee-table th,
+.fee-table td {
+    padding: 15px 12px;
+    text-align: left;
+    border-bottom: 1px solid #404040;
+}
+
+.fee-table th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.fee-table td {
+    color: #e0e0e0;
+    font-size: 0.95rem;
+}
+
+.fee-table tbody tr:hover {
+    background: #3d3d3d;
+}
+
+.fee-table .total-row {
+    background: #3d3d3d;
+    border-top: 2px solid #4caf50;
+}
+
+.fee-table .total-row td {
+    color: #4caf50;
+    font-size: 1rem;
+}
+
+.fee-table i {
+    margin-right: 8px;
+    color: #999;
+}
+
+.fee-note {
+    margin-top: 20px;
+    padding: 15px;
+    background: #2d2d2d;
+    border-radius: 8px;
+    border: 1px solid #404040;
+}
+
+.fee-note p {
+    margin: 0 0 10px 0;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.fee-note ul {
+    margin: 0;
+    padding-left: 20px;
+    color: #bbb;
+}
+
+.fee-note li {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #cccccc;
+}
+
+.revenue-stats-visual {
+    padding: 20px;
+}
+
+.stat-bar {
+    margin-bottom: 25px;
+}
+
+.stat-bar-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    color: #e0e0e0;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.stat-bar-bg {
+    background: #3d3d3d;
+    height: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.stat-bar-fill {
+    height: 100%;
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    color: white;
+    font-weight: bold;
+    border-radius: 15px;
+}
+
+.stat-bar-fill.free {
+    background: linear-gradient(90deg, #4caf50 0%, #66bb6a 100%);
+}
+
+.stat-bar-fill.first-hour {
+    background: linear-gradient(90deg, #2196f3 0%, #42a5f5 100%);
+}
+
+.stat-bar-fill.additional {
+    background: linear-gradient(90deg, #ff9800 0%, #ffa726 100%);
+}
+
+@media (max-width: 1024px) {
+    .revenue-layout {
+        grid-template-columns: 1fr;
+    }
+}

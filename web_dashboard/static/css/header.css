@@ -1,0 +1,97 @@
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background: #2d2d2d;
+    border-radius: 0;
+    padding: 15px 30px;
+    margin: 0;
+    border-bottom: 2px solid #404040;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.page-title {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin: 0;
+    font-weight: 600;
+}
+
+.user-menu {
+    font-size: 2rem;
+    color: #b0b0b0;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.user-menu:hover {
+    color: #4a90e2;
+}
+
+.datetime {
+    display: flex;
+    gap: 15px;
+    font-size: 1rem;
+    color: #999;
+}
+
+.time {
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    color: #ffffff;
+}
+
+.date {
+    color: #888;
+}
+
+/* Connection status moved to sidebar footer */
+.connection-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    background: #2d2d2d;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    border: 1px solid #404040;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ffc107;
+    animation: pulse 2s infinite;
+}
+
+.status-dot.connected {
+    background: #4caf50;
+}
+
+.status-dot.disconnected {
+    background: #f44336;
+    animation: none;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}

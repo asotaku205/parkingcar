@@ -1,0 +1,187 @@
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: #2d2d2d;
+    border-radius: 10px;
+    padding: 25px;
+    border: 1px solid #404040;
+}
+
+.card.full-width {
+    grid-column: 1 / -1;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #404040;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.tab-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding: 20px 25px;
+    background: linear-gradient(135deg, #2d2d2d, #3a3a3a);
+    border-radius: 10px;
+    border: 1px solid #404040;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tab-main-title {
+    font-size: 1.4rem;
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+}
+
+.tab-main-title i {
+    color: #00bcd4;
+    font-size: 1.5rem;
+}
+
+.card-header-with-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #404040;
+}
+
+.card-header-with-button .card-title {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.export-btn {
+    background: linear-gradient(135deg, #1d7330, #28a745);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    white-space: nowrap;
+}
+
+.export-btn:hover {
+    background: linear-gradient(135deg, #28a745, #34ce57);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(40, 167, 69, 0.5);
+}
+
+.export-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(40, 167, 69, 0.4);
+}
+
+.export-btn i {
+    font-size: 1.2rem;
+    animation: pulse-icon 2s ease-in-out infinite;
+}
+
+@keyframes pulse-icon {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+
+.parking-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    padding: 10px;
+}
+
+.parking-slot {
+    aspect-ratio: 1.5/1;
+    border: 3px solid #404040;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    background: #3d3d3d;
+    padding: 15px;
+}
+
+.parking-slot.occupied {
+    border: 3px solid #ff9800;
+    background: #4a3a2a;
+}
+
+.parking-slot.available {
+    border: 3px solid #4caf50;
+    background: #2a3f2a;
+}
+
+.slot-number {
+    font-size: 0.85rem;
+    color: #999;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.slot-icon {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+}
+
+.slot-icon i {
+    color: inherit;
+}
+
+.parking-slot.occupied .slot-icon {
+    color: #ff9800;
+}
+
+.parking-slot.available .slot-icon {
+    color: #4caf50;
+}
+
+.slot-status {
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.slot-status.occupied { color: #ff9800; }
+.slot-status.available { color: #4caf50; }
